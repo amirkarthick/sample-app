@@ -2,32 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: production-deployment
-  namespace: prod
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: production-deployment
+      app: production-app
   template:
     metadata:
       labels:
-        app: production-deployment
+        app: production-app
     spec:
       containers:
-      - name: production
-        image: us-east4-docker.pkg.dev/qwiklabs-gcp-03-52cd18060510/my-repository/sample-app:v2.0
+      - name: production-container
+        image: <todo>
         ports:
         - containerPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: prod-deployment-service
-  namespace: prod
-spec:
-  type: LoadBalancer
-  selector:
-    app: production-deployment
-  ports:
-  - port: 8080
-    targetPort: 8080
