@@ -1,7 +1,7 @@
 substitutions:
   _VERSION: v1.0
-  _REGION: <your-region>
-  _ZONE: <your-zone>
+  _REGION: us-east4
+  _ZONE: us-east4-a
 
 options:
   logging: CLOUD_LOGGING_ONLY
