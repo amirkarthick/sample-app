@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: production
-        image: <your-region>-docker.pkg.dev/PROJECT_ID/my-repository/sample-app:v1.0
+        image: <your-region>-docker.pkg.dev/qwiklabs-gcp-03-52cd18060510/my-repository/sample-app:v1.0
         ports:
         - containerPort: 8080
 ---
