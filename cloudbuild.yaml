@@ -1,0 +1,20 @@
+substitutions:
+  _VERSION: v1.0
+  _REGION: <your-region>
+  _ZONE: <your-zone>
+
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', '${_REGION}-docker.pkg.dev/$PROJECT_ID/my-repository/sample-app:${_VERSION}', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', '${_REGION}-docker.pkg.dev/$PROJECT_ID/my-repository/sample-app:${_VERSION}']
+- name: 'gcr.io/cloud-builders/kubectl'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=hello-cluster'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    gcloud container clusters get-credentials hello-cluster --zone ${_ZONE} --project $PROJECT_ID
+    kubectl apply -f prod/deployment.yaml
